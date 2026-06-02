@@ -493,6 +493,9 @@
 </footer>
 
 <script>
+  let count = 47;
+  const countEl = document.getElementById('waitlist-count');
+  const subEl = document.getElementById('waitlist-sub');
   const fomoLine = document.getElementById('fomo-line');
   const fomoMessages = [
     'Someone from <span class="hl">Tampere</span> just joined the waitlist',
@@ -501,6 +504,14 @@
     'Someone from <span class="hl">Helsinki</span> just joined the waitlist'
   ];
   let currentFomo = 0;
+
+  setInterval(() => {
+    if (Math.random() > 0.65) {
+      count++;
+      countEl.textContent = count;
+      if (subEl) subEl.textContent = count + ' others';
+    }
+  }, 20000);
 
   setInterval(() => {
     let nextFomo = Math.floor(Math.random() * fomoMessages.length);
@@ -538,6 +549,9 @@
       });
 
       if (response.ok) {
+        count++;
+        countEl.textContent = count;
+        if (subEl) subEl.textContent = count + ' others';
         formWrapper.style.display = 'none';
         success.style.display = 'block';
       } else {
